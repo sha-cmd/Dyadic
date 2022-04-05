@@ -1,0 +1,2 @@
+# Dyadic
+IA and robotic
