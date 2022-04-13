@@ -1,10 +1,20 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
+import json
 import logging
 import sys
+import time
 import traceback
+import uuid
+
 from datetime import datetime
+
+from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
+from azure.cognitiveservices.language.luis.authoring.models import ApplicationCreateObject
+from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
+from msrest.authentication import CognitiveServicesCredentials
+from functools import reduce
 
 from aiohttp import web
 from aiohttp.web import Request, Response, json_response
@@ -34,7 +44,12 @@ CONFIG = DefaultConfig()
 # Create adapter.
 # See https://aka.ms/about-bot-adapter to learn more about how bots work.
 SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
+#print(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 ADAPTER = BotFrameworkAdapter(SETTINGS)
+# LUIS adapter
+authoringKey = CONFIG.SUB_ID
+authoringEndpoint = CONFIG.LUIS_ID
+print(authoringKey, authoringEndpoint)
 
 
 # Catch-all for errors.
