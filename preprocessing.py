@@ -4,7 +4,6 @@ import re
 
 def add_entityLabels(some_dict, a_dict):
     composition = a_dict['labels']['acts']
-    #print(composition)
     intent = ''
     some_dict['entityLabels'] = []
     for it, m in enumerate(composition):
@@ -41,7 +40,6 @@ def main():
     data = []
     for m_index, m_value in df['turns'].iteritems():
         for n_index, n_value in enumerate(df['turns'].iloc[m_index]):
-            #print(m_index, n_index)
             data.append(to_dict(df['turns'].iloc[m_index][n_index]))
 
     pd.DataFrame(data).to_json('data.json',orient='records')
