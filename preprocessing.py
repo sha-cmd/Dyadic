@@ -35,14 +35,14 @@ def to_dict(a_dict):
 
 
 def main():
-    df = pd.read_json('../data/frames.json')
+    df = pd.read_json('data/frames.json')
 
     data = []
     for m_index, m_value in df['turns'].iteritems():
         for n_index, n_value in enumerate(df['turns'].iloc[m_index]):
             data.append(to_dict(df['turns'].iloc[m_index][n_index]))
 
-    pd.DataFrame(data).to_json('data.json',orient='records')
+    pd.DataFrame(data).to_json('data/data.json',orient='records')
 
 
 if __name__ == "__main__":
