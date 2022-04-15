@@ -58,19 +58,69 @@ enlst = []
 inlst = []
 inlst = data['intentName'].value_counts().index.tolist()
 enlst = set([value[0]['entityName'] for index, value in data['entityLabels'].iteritems() if value])
-client.model.add_prebuilt(app_id, versionId, prebuilt_extractor_names=["geographyV2"])
-client.model.add_prebuilt(app_id, versionId, prebuilt_extractor_names=["datetimeV2"])
+# Add prebuilt extractor
+try:
+    client.model.add_prebuilt(app_id, versionId, prebuilt_extractor_names=["geographyV2"])
+except:
+    pass
+try:
+    client.model.add_prebuilt(app_id, versionId, prebuilt_extractor_names=["datetimeV2"])
+except:
+    pass
+try:
+    client.model.add_prebuilt(app_id, versionId, prebuilt_extractor_names=["number"])
+except:
+    pass
+# Add intents
 for intentName in inlst:
     try:
         client.model.add_intent(app_id, versionId, intentName)
     except:
         continue
-for entityName, prebuiltExtractorName in enlst.items():
+# Add entity with features
+entityWithFeatures =  {'or_city': 'geographyV2',
+ 'dst_city': 'geographyV2',
+ 'str_date': 'datetimeV2',
+ 'end_date': 'datetimeV2'}
+for entityName, prebuiltExtractorName in entityWithFeatures.items():
     try:
         modelId = client.model.add_entity(app_id, versionId, name=entityName)
+        modelObject = client.model.get_entity(app_id, versionId, modelId)
+        prebuiltFeatureRequiredDefinition = { "model_name": prebuiltExtractorName, "is_required": True }
+        client.features.add_entity_feature(app_id, versionId, pizzaQuantityId, prebuiltFeatureRequiredDefinition)
+    except: 
+        continue
 
+enlst = ['action',
+         'budget',
+         'category',
+         'dep_time_dst',
+         'dep_time_or',
+         'duration',
+         'count',
+         'count_amenities',
+         'count_category',
+         'count_dst_city',
+         'count_name',
+         'count_seat',
+         'n_adults',
+         'n_children',
+         'seat',
+         'price',
+         'gst_rating',
+         'intent',
+         'max_duration',
+         'min_duration',
+         'name',
+         'ref_anaphora']
 
-labeledExampleUtteranceWithMLEntity = data.iloc[0].to_dict()
+for entityName in enlst:
+    try:
+        modelId = client.model.add_entity(app_id, versionId, name=entityName)
+    except: 
+        continue
+
+labeledExampleUtteranceWithMLEntity = data.iloc[1].to_dict()
 
 print("Labeled Example Utterance:", labeledExampleUtteranceWithMLEntity)
 
