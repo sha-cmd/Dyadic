@@ -47,10 +47,26 @@ SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 #print(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 ADAPTER = BotFrameworkAdapter(SETTINGS)
 # LUIS adapter
-authoringKey = CONFIG.SUB_ID
-authoringEndpoint = CONFIG.LUIS_ID
-print(authoringKey, authoringEndpoint)
+authoringKey = CONFIG.LUIS_KEY
+authoringEndpoint = CONFIG.LUIS_ENDPOINT
+app_id = CONFIG.LUIS_ID
+client = LUISAuthoringClient(authoringEndpoint, CognitiveServicesCredentials(authoringKey))
+versionId = "0.1"
 
+# Define labeled example
+client.model.add_intent(app_id, versionId, 'inform')
+labeledExampleUtteranceWithMLEntity = {'text': 'I am looking for a honeymoon package to Manaus. I heard it is the perfect honeymooners paradise. The wedding cost us an arm and a leg so I really need something reasonable.',
+ 'entityLabels': [{'startCharIndex': 40,
+   'endCharIndex': 45,
+   'entityName': 'dst_city'}],
+ 'intentName': 'inform'}
+
+print("Labeled Example Utterance:", labeledExampleUtteranceWithMLEntity)
+
+# Add an example for the entity.
+# Enable nested children to allow using multiple models with the same name.
+# The quantity subentity and the phraselist could have the same exact name if this is set to True
+client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, { "enableNestedChildren": True })
 
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
