@@ -10,6 +10,7 @@ class DefaultConfig:
     PORT = 3978
     APP_ID = os.environ.get("MicrosoftAppId", "Environment variable does not exist")
     APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "Environment variable does not exist")
-    SUB_ID = os.environ.get("MicrosoftSubscribeId", "Environment variable does not exist")
+    LUIS_KEY = os.environ.get("MicrosoftSubscribeId", "Environment variable does not exist")
     LUIS_ID = os.environ.get("MicrosoftLUISId", "Environment variable does not exist")
+    LUIS_ENDPOINT = os.environ.get("MicrosoftLUISEndpoint", "Environment variable does not exist")
 
