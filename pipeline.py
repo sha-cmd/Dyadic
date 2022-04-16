@@ -120,12 +120,16 @@ for entityName in enlst:
     except: 
         continue
 
-labeledExampleUtteranceWithMLEntity = data.iloc[1].to_dict()
-
-print("Labeled Example Utterance:", labeledExampleUtteranceWithMLEntity)
+for it, sample in data.iterrows():
+    try:
+        labeledExampleUtteranceWithMLEntity = sample.to_dict()
+        client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, { "enableNestedChildren": True })
+    except:
+        pass
+# print("Labeled Example Utterance:", labeledExampleUtteranceWithMLEntity)
 
 # Add an example for the entity.
 # Enable nested children to allow using multiple models with the same name.
 # The quantity subentity and the phraselist could have the same exact name if this is set to True
-client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, { "enableNestedChildren": True })
+
 
