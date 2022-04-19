@@ -41,7 +41,8 @@ def main():
     data = []
     for m_index, m_value in df['turns'].iteritems():
         for n_index, n_value in enumerate(df['turns'].iloc[m_index]):
-            data.append(to_dict(df['turns'].iloc[m_index][n_index]))
+            if n_index % 2 == 0:
+                data.append(to_dict(df['turns'].iloc[m_index][n_index]))
 
     pd.DataFrame(data).to_json('data/data.json',orient='records')
 
