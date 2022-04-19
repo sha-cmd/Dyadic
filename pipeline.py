@@ -1,33 +1,16 @@
-import json
 import logging
 import pandas as pd
-import sys
-import time
-import traceback
-import uuid
-
-from datetime import datetime
 
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
-from azure.cognitiveservices.language.luis.authoring.models import ApplicationCreateObject
-from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
-from functools import reduce
 
-from aiohttp import web
-from aiohttp.web import Request, Response, json_response
 from botbuilder.core import (
     BotFrameworkAdapterSettings,
     TurnContext,
     BotFrameworkAdapter,
 )
-from botbuilder.core.integration import aiohttp_error_middleware
-from botbuilder.schema import Activity, ActivityTypes
 
-from bot import MyBot
 from config import DefaultConfig
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.log_exporter import AzureEventHandler
 
 ################################################################
 logger = logging.getLogger(__name__)
