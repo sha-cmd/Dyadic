@@ -38,13 +38,17 @@ def to_dict(a_dict):
 def main():
     df = pd.read_json('data/frames.json')
 
-    data = []
+    data_lst = []
     for m_index, m_value in df['turns'].iteritems():
         for n_index, n_value in enumerate(df['turns'].iloc[m_index]):
             if n_index % 2 == 0:
-                data.append(to_dict(df['turns'].iloc[m_index][n_index]))
+                data_lst.append(to_dict(df['turns'].iloc[m_index][n_index]))
 
-    pd.DataFrame(data).to_json('data/data.json', orient='records')
+    data = pd.DataFrame(data_lst)
+    df_inform = data.loc[data['intentName'] == 'book'].sample(1000)
+    df_none = data.loc[data['intentName'] == 'None'].sample(100)
+    df_tt = pd.concat([df_inform, df_none])
+    pd.DataFrame(df_tt).to_json('data/data.json', orient='records')
 
 
 if __name__ == "__main__":
