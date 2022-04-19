@@ -44,7 +44,7 @@ def main():
             if n_index % 2 == 0:
                 data.append(to_dict(df['turns'].iloc[m_index][n_index]))
 
-    pd.DataFrame(data).to_json('data/data.json',orient='records')
+    pd.DataFrame(data).to_json('data/data.json', orient='records')
 
 
 if __name__ == "__main__":
