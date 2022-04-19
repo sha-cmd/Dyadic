@@ -15,9 +15,15 @@ def add_entityLabels(some_dict, a_dict):
             # Search the first position in discussion
             try:
                 if (not n['val'] == "-1") :  # Exclusion of unpresented data for reliability
+                    spacePos = []
+                    for it, c in enumerate(some_dict['text']):
+                        if c.isspace():
+                            spacePos.append(it)
                     match = re.search(re.escape(n['val']), some_dict['text'])
                     startCharIndex = match.span()[0]
                     endCharIndex = match.span()[1] - 1  # Last char inclused
+                    startCharIndex = max([x for x in spacePos if x < startCharIndex])
+                    endCharIndex = min([x for x in spacePos if x > endCharIndex])
                     # Save it
                     some_dict["intent"] = intent
                     some_dict['entities'].append({"startPos": startCharIndex,
