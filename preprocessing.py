@@ -9,6 +9,7 @@ def add_entityLabels(some_dict, a_dict):
     for it, m in enumerate(composition):
         if it == 0:
             intent = m['name']
+            intent = intent if not intent == 'inform' else 'book'
         for n in m['args']:
             entityName = n['key']
             # Search the first position in discussion
