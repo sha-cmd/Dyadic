@@ -54,5 +54,6 @@ def main():
     pd.DataFrame(df_train).to_json('data/data_train.json', orient='records')
     pd.DataFrame(df_test).to_json('data/data_test.json', orient='records')
 
+
 if __name__ == "__main__":
     main()
