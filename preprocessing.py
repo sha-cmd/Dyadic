@@ -45,11 +45,14 @@ def main():
                 data_lst.append(to_dict(df['turns'].iloc[m_index][n_index]))
 
     data = pd.DataFrame(data_lst)
-    df_inform = data.loc[data['intentName'] == 'book'].sample(1000)
+    df_book = data.loc[data['intentName'] == 'book'].sample(1000)
     df_none = data.loc[data['intentName'] == 'None'].sample(100)
-    df_tt = pd.concat([df_inform, df_none])
-    pd.DataFrame(df_tt).to_json('data/data.json', orient='records')
-
+    book_nb = len(df_book)
+    none_nb = len(df_none)
+    df_train = pd.concat([df_book[:int(book_nb*0.75)], df_none[:int(none_nb*0.75)]])
+    df_test = pd.concat([df_book[int(book_nb*0.75):], df_none[int(none_nb*0.75):]])
+    pd.DataFrame(df_train).to_json('data/data_train.json', orient='records')
+    pd.DataFrame(df_test).to_json('data/data_test.json', orient='records')
 
 if __name__ == "__main__":
     main()
