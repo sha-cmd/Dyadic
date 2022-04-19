@@ -123,7 +123,7 @@ for entityName in enlst:
 for it, sample in data.iterrows():
     try:
         labeledExampleUtteranceWithMLEntity = sample.to_dict()
-        client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, { "enableNestedChildren": True })
+        client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, {"enableNestedChildren": True})
     except:
         pass
 # print("Labeled Example Utterance:", labeledExampleUtteranceWithMLEntity)
