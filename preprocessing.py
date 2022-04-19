@@ -5,7 +5,7 @@ import re
 def add_entityLabels(some_dict, a_dict):
     composition = a_dict['labels']['acts']
     intent = ''
-    some_dict['entityLabels'] = []
+    some_dict['entities'] = []
     for it, m in enumerate(composition):
         if it == 0:
             intent = m['name']
@@ -19,12 +19,12 @@ def add_entityLabels(some_dict, a_dict):
                     startCharIndex = match.span()[0]
                     endCharIndex = match.span()[1] - 1  # Last char inclused
                     # Save it
-                    some_dict["intentName"] = intent
-                    some_dict['entityLabels'].append({"startCharIndex": startCharIndex,
-                                     "endCharIndex": endCharIndex,
-                                     "entityName": entityName})
+                    some_dict["intent"] = intent
+                    some_dict['entities'].append({"startPos": startCharIndex,
+                                     "endPos": endCharIndex,
+                                     "entity": entityName})
             except:
-                some_dict["intentName"] = 'None'
+                some_dict["intent"] = 'None'
     return some_dict
 
 
@@ -45,8 +45,8 @@ def main():
                 data_lst.append(to_dict(df['turns'].iloc[m_index][n_index]))
 
     data = pd.DataFrame(data_lst)
-    df_book = data.loc[data['intentName'] == 'book'].sample(1000)
-    df_none = data.loc[data['intentName'] == 'None'].sample(100)
+    df_book = data.loc[data['intent'] == 'book'].sample(1000)
+    df_none = data.loc[data['intent'] == 'None'].sample(100)
     book_nb = len(df_book)
     none_nb = len(df_none)
     df_train = pd.concat([df_book[:int(book_nb*0.75)], df_none[:int(none_nb*0.75)]])
