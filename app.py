@@ -66,7 +66,7 @@ print("Labeled Example Utterance:", labeledExampleUtteranceWithMLEntity)
 # Add an example for the entity.
 # Enable nested children to allow using multiple models with the same name.
 # The quantity subentity and the phraselist could have the same exact name if this is set to True
-client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, { "enableNestedChildren": True })
+client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, {"enableNestedChildren": True})
 
 # Catch-all for errors.
 async def on_error(context: TurnContext, error: Exception):
