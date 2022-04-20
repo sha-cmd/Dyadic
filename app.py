@@ -23,6 +23,8 @@ from botbuilder.schema import Activity, ActivityTypes
 from bots import CustomPromptBot
 from config import DefaultConfig
 
+from opencensus.ext.azure.log_exporter import AzureEventHandler
+
 ################################################################
 logger = logging.getLogger(__name__)
 #logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=<your_key>'))
