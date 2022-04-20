@@ -1,6 +1,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
+import logging
 import sys
 import traceback
 from datetime import datetime
@@ -21,6 +22,13 @@ from botbuilder.schema import Activity, ActivityTypes
 
 from bots import CustomPromptBot
 from config import DefaultConfig
+
+################################################################
+logger = logging.getLogger(__name__)
+#logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=<your_key>'))
+logger.setLevel(logging.INFO)
+logger.info('Hello, World!')
+################################################################
 
 CONFIG = DefaultConfig()
 
