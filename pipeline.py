@@ -41,7 +41,7 @@ versionId = "0.1"
 
 # Define labeled example
 #client.model.add_intent(app_id, versionId, 'inform')
-data = pd.read_json('data/data.json', orient='records')
+data = pd.read_json('data/data_train.json', orient='records')
 enlst = []
 inlst = []
 inlst = data['intentName'].value_counts().index.tolist()
