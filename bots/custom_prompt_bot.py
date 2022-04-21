@@ -165,6 +165,8 @@ class CustomPromptBot(ActivityHandler):
                 )
                 await turn_context.send_activity(
                     MessageFactory.text(
+                        f"I understand that you want to go to {profile.dst_city} from {profile.or_city}, between " +
+                        f"{profile.str_date} and {profile.end_date}, with a budget of {profile.budget}€. " +
                         f"Thanks for completing the booking {profile.name}."
                     )
                 )
