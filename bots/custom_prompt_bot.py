@@ -79,40 +79,89 @@ class CustomPromptBot(ActivityHandler):
                     MessageFactory.text(f"Hi {profile.name}")
                 )
                 await turn_context.send_activity(
-                    MessageFactory.text("How old are you?")
+                    MessageFactory.text("From which airport do you want to take off?")
                 )
-                flow.last_question_asked = Question.AGE
+                flow.last_question_asked = Question.OR_CITY
 
         # validate age then ask for date
-        elif flow.last_question_asked == Question.AGE:
-            validate_result = self._validate_age(user_input)
+        elif flow.last_question_asked == Question.OR_CITY:
+            validate_result = self._validate_name(user_input)
             if not validate_result.is_valid:
                 await turn_context.send_activity(
                     MessageFactory.text(validate_result.message)
                 )
             else:
-                profile.age = validate_result.value
+                profile.or_city = validate_result.value
                 await turn_context.send_activity(
-                    MessageFactory.text(f"I have your age as {profile.age}.")
+                    MessageFactory.text(f"I have noticed that you leave from {profile.or_city}.")
                 )
                 await turn_context.send_activity(
-                    MessageFactory.text("When is your flight?")
+                    MessageFactory.text("Toward which city do you want to travel?")
                 )
-                flow.last_question_asked = Question.DATE
+                flow.last_question_asked = Question.DST_CITY
 
-        # validate date and wrap it up
-        elif flow.last_question_asked == Question.DATE:
+        # validate age then ask for date
+        elif flow.last_question_asked == Question.DST_CITY:
+            validate_result = self._validate_name(user_input)
+            if not validate_result.is_valid:
+                await turn_context.send_activity(
+                    MessageFactory.text(validate_result.message)
+                )
+            else:
+                profile.dst_city = validate_result.value
+                await turn_context.send_activity(
+                    MessageFactory.text(f"I have noticed that you have chosen {profile.dst_city}.")
+                )
+                await turn_context.send_activity(
+                    MessageFactory.text("When do you want to start your journey?")
+                )
+                flow.last_question_asked = Question.STR_DATE
+
+        # validate age then ask for date
+        elif flow.last_question_asked == Question.STR_DATE:
             validate_result = self._validate_date(user_input)
             if not validate_result.is_valid:
                 await turn_context.send_activity(
                     MessageFactory.text(validate_result.message)
                 )
             else:
-                profile.date = validate_result.value
+                profile.str_date = validate_result.value
                 await turn_context.send_activity(
-                    MessageFactory.text(
-                        f"Your cab ride to the airport is scheduled for {profile.date}."
-                    )
+                    MessageFactory.text(f"Your travel should start on : {profile.str_date}.")
+                )
+                await turn_context.send_activity(
+                    MessageFactory.text("When do you want to put an end to your trip?")
+                )
+                flow.last_question_asked = Question.END_DATE
+
+        # validate age then ask for date
+        elif flow.last_question_asked == Question.END_DATE:
+            validate_result = self._validate_date(user_input)
+            if not validate_result.is_valid:
+                await turn_context.send_activity(
+                    MessageFactory.text(validate_result.message)
+                )
+            else:
+                profile.end_date = validate_result.value
+                await turn_context.send_activity(
+                    MessageFactory.text(f"You want to come back on : {profile.end_date}.")
+                )
+                await turn_context.send_activity(
+                    MessageFactory.text("What amount of money do you want to allocate to your flight?")
+                )
+                flow.last_question_asked = Question.BUDGET
+
+        # validate age then ask for date
+        elif flow.last_question_asked == Question.BUDGET:
+            validate_result = self._validate_budget(user_input)
+            if not validate_result.is_valid:
+                await turn_context.send_activity(
+                    MessageFactory.text(validate_result.message)
+                )
+            else:
+                profile.budget = validate_result.value
+                await turn_context.send_activity(
+                    MessageFactory.text(f"Your budget is {profile.budget}€.")
                 )
                 await turn_context.send_activity(
                     MessageFactory.text(
@@ -133,18 +182,17 @@ class CustomPromptBot(ActivityHandler):
 
         return ValidationResult(is_valid=True, value=user_input)
 
-    def _validate_age(self, user_input: str) -> ValidationResult:
+    def _validate_budget(self, user_input: str) -> ValidationResult:
         # Attempt to convert the Recognizer result to an integer. This works for "a dozen", "twelve", "12", and so on.
         # The recognizer returns a list of potential recognition results, if any.
         results = recognize_number(user_input, Culture.English)
         for result in results:
             if "value" in result.resolution:
                 age = int(result.resolution["value"])
-                if 18 <= age <= 130:
-                    return ValidationResult(is_valid=True, value=age)
+                return ValidationResult(is_valid=True, value=age)
 
         return ValidationResult(
-            is_valid=False, message="Please enter an age between 18 and 120."
+            is_valid=False, message="Please enter a number for your budget."
         )
 
     def _validate_date(self, user_input: str) -> ValidationResult:
