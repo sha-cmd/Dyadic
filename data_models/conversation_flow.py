@@ -6,9 +6,12 @@ from enum import Enum
 
 class Question(Enum):
     NAME = 1
-    AGE = 2
-    DATE = 3
-    NONE = 4
+    OR_CITY = 2
+    DST_CITY = 3
+    STR_DATE = 4
+    END_DATE = 5
+    BUDGET = 6
+    NONE = 7
 
 
 class ConversationFlow:
