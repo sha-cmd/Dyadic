@@ -11,7 +11,7 @@ class DefaultConfig:
     """ Bot Configuration """
 
     PORT = 3978
-    APP_ID = "Remediator\$Remediator"
+    APP_ID = "e27587f8-332e-4207-87eb-94ac5a02cbdb"
     APP_PASSWORD = "lbRM2Nh21rDlQ7SoC6fyJLrPpZfqxbhsga4noW93b5XQim9ybnbRePy1Z410"
     LUIS_KEY = os.environ.get("MicrosoftSubscribeId", "Environment variable does not exist")
     LUIS_ID = os.environ.get("MicrosoftLUISId", "Environment variable does not exist")
