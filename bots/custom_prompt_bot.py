@@ -140,7 +140,7 @@ class CustomPromptBot(ActivityHandler):
         for result in results:
             if "value" in result.resolution:
                 age = int(result.resolution["value"])
-                if 18 <= age <= 120:
+                if 18 <= age <= 130:
                     return ValidationResult(is_valid=True, value=age)
 
         return ValidationResult(
