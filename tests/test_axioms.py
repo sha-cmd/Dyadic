@@ -6,5 +6,4 @@ def inc():
 
 
 def pass_test(inc):
-    for x in inc:
-        assert x == 5
+    assert inc == 5
