@@ -74,8 +74,8 @@ for entityName, prebuiltExtractorName in entityWithFeatures.items():
     try:
         modelId = client.model.add_entity(app_id, versionId, name=entityName)
         modelObject = client.model.get_entity(app_id, versionId, modelId)
-        prebuiltFeatureRequiredDefinition = { "model_name": prebuiltExtractorName, "is_required": True }
-        client.features.add_entity_feature(app_id, versionId, pizzaQuantityId, prebuiltFeatureRequiredDefinition)
+        prebuiltFeatureRequiredDefinition = {"model_name": prebuiltExtractorName, "is_required": True}
+        client.features.add_entity_feature(app_id, versionId, modelObject.id, prebuiltFeatureRequiredDefinition)
     except: 
         continue
 
@@ -105,19 +105,17 @@ enlst = ['action',
 for entityName in enlst:
     try:
         modelId = client.model.add_entity(app_id, versionId, name=entityName)
-    except: 
+    except Exception as e:
+        print(e)
         continue
 
 for it, sample in data.iterrows():
     try:
         labeledExampleUtteranceWithMLEntity = sample.to_dict()
         client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, {"enableNestedChildren": True})
-    except:
+    except Exception as e:
+        print('Add example  : ', e)
         pass
-# print("Labeled Example Utterance:", labeledExampleUtteranceWithMLEntity)
 
-# Add an example for the entity.
-# Enable nested children to allow using multiple models with the same name.
-# The quantity subentity and the phraselist could have the same exact name if this is set to True
 
 
