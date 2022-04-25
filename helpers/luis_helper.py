@@ -10,9 +10,9 @@ from booking_details import BookingDetails
 
 class Intent(Enum):
     BOOK_FLIGHT = "BookFlight"
-    CANCEL = "Cancel"
-    GET_WEATHER = "GetWeather"
-    NONE_INTENT = "NoneIntent"
+    # CANCEL = "Cancel"
+    # GET_WEATHER = "GetWeather"
+    NONE_INTENT = "None"
 
 
 def top_intent(intents: Dict[Intent, dict]) -> TopIntent:
