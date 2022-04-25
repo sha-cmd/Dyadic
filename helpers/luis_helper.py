@@ -56,10 +56,10 @@ class LuisHelper:
 
                 # We need to get the result from the LUIS JSON which at every level returns an array.
                 to_entities = recognizer_result.entities.get("$instance", {}).get(
-                    "To", []
+                    "dst_city", []
                 )
                 if len(to_entities) > 0:
-                    if recognizer_result.entities.get("To", [{"$instance": {}}])[0][
+                    if recognizer_result.entities.get("dst_city", [{"$instance": {}}])[0][
                         "$instance"
                     ]:
                         result.destination = to_entities[0]["text"].capitalize()
@@ -69,10 +69,10 @@ class LuisHelper:
                         )
 
                 from_entities = recognizer_result.entities.get("$instance", {}).get(
-                    "From", []
+                    "or_city", []
                 )
                 if len(from_entities) > 0:
-                    if recognizer_result.entities.get("From", [{"$instance": {}}])[0][
+                    if recognizer_result.entities.get("or_city", [{"$instance": {}}])[0][
                         "$instance"
                     ]:
                         result.origin = from_entities[0]["text"].capitalize()
@@ -80,21 +80,42 @@ class LuisHelper:
                         result.unsupported_airports.append(
                             from_entities[0]["text"].capitalize()
                         )
-
-                # This value will be a TIMEX. And we are only interested in a Date so grab the first result and drop
-                # the Time part. TIMEX is a format that represents DateTime expressions that include some ambiguity.
-                # e.g. missing a Year.
-                date_entities = recognizer_result.entities.get("datetime", [])
-                if date_entities:
-                    timex = date_entities[0]["timex"]
-
-                    if timex:
-                        datetime = timex[0].split("T")[0]
-
-                        result.travel_date = datetime
-
-                else:
-                    result.travel_date = None
+                from_entities = recognizer_result.entities.get("$instance", {}).get(
+                    "budget", []
+                )
+                if len(from_entities) > 0:
+                    if recognizer_result.entities.get("budget", [{"$instance": {}}])[0][
+                        "$instance"
+                    ]:
+                        result.origin = from_entities[0]["text"].capitalize()
+                    else:
+                        result.unsupported_airports.append(
+                            from_entities[0]["text"].capitalize()
+                        )
+                from_entities = recognizer_result.entities.get("$instance", {}).get(
+                    "str_date", []
+                )
+                if len(from_entities) > 0:
+                    if recognizer_result.entities.get("str_date", [{"$instance": {}}])[0][
+                        "$instance"
+                    ]:
+                        result.origin = from_entities[0]["text"].capitalize()
+                    else:
+                        result.unsupported_airports.append(
+                            from_entities[0]["text"].capitalize()
+                        )
+                from_entities = recognizer_result.entities.get("$instance", {}).get(
+                    "end_date", []
+                )
+                if len(from_entities) > 0:
+                    if recognizer_result.entities.get("end_date", [{"$instance": {}}])[0][
+                        "$instance"
+                    ]:
+                        result.origin = from_entities[0]["text"].capitalize()
+                    else:
+                        result.unsupported_airports.append(
+                            from_entities[0]["text"].capitalize()
+                        )
 
         except Exception as exception:
             print(exception)
