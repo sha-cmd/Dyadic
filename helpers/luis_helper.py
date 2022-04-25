@@ -64,9 +64,7 @@ class LuisHelper:
                     ]:
                         result.destination = to_entities[0]["text"].capitalize()
                     else:
-                        result.unsupported_airports.append(
-                            to_entities[0]["text"].capitalize()
-                        )
+                        result.destination = None
 
                 from_entities = recognizer_result.entities.get("$instance", {}).get(
                     "or_city", []
@@ -77,9 +75,7 @@ class LuisHelper:
                     ]:
                         result.origin = from_entities[0]["text"].capitalize()
                     else:
-                        result.unsupported_airports.append(
-                            from_entities[0]["text"].capitalize()
-                        )
+                        result.origin = None
                 from_entities = recognizer_result.entities.get("$instance", {}).get(
                     "budget", []
                 )
