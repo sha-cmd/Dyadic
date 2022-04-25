@@ -1,3 +1,7 @@
+"""Ce fichier nous permet de créer deux jeux de données pour LUIS. La particularité de ce travail reste que LUIS
+demande des clés de dictionnaire différentes pour chaque jeu. Ainsi, nous traiterons deux jeux de données dans
+une boucle unique. L’écriture est un peu déconcertante, mais cela permet d’avoir les bonnes clés pour LUIS et
+d’optimiser le code pour qu’il soit rapide"""
 import pandas as pd
 import re
 
@@ -52,7 +56,10 @@ def to_dict(a_dict):
 
 def main():
     df = pd.read_json('data/frames.json')
-
+    # LUIS nécessite un format de dictionnaire pour l’entraînement différent de celui pour le test.
+    # Ainsi nous avons, dans une même boucle traité de jeux de données, dont le tirage aléatoire donne
+    # le même résultat grâce à la graine d’initialisation. Ainsi il n’y a pas de redondance dans les
+    # échantillons, donc la séparation des 2 jeux est parfaite.
     data_lst = []
     data_test_lst = []
     for m_index, m_value in df['turns'].iteritems():
@@ -63,7 +70,7 @@ def main():
                 data_test_lst.append(test_sample)
                 
     # Format de fichier JSON conforme pour entraîner LUIS, la graine permet la reproductibilité
-    data = pd.DataFrame(data_lst)
+    data = pd.DataFrame(data_lst)  # jeu d’entraînement
     df_book = data.loc[data['intentName'] == 'book'].sample(1000, random_state=42)
     df_none = data.loc[data['intentName'] == 'None'].sample(100, random_state=42)
     book_nb = len(df_book)
@@ -72,7 +79,7 @@ def main():
     pd.DataFrame(df_train).to_json('data/data_train.json', orient='records')
 
     # Format de fichier JSON conforme pour tester LUIS, la graine permet la reproductibilité
-    data = pd.DataFrame(data_test_lst)
+    data = pd.DataFrame(data_test_lst)  # jeu de test (avec d’autres clés)
     df_book = data.loc[data['intent'] == 'book'].sample(1000, random_state=42)
     df_none = data.loc[data['intent'] == 'None'].sample(100, random_state=42)
     book_nb = len(df_book)
