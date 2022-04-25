@@ -87,11 +87,9 @@ class LuisHelper:
                     if recognizer_result.entities.get("budget", [{"$instance": {}}])[0][
                         "$instance"
                     ]:
-                        result.origin = from_entities[0]["text"].capitalize()
+                        result.budget = from_entities[0]["text"].capitalize()
                     else:
-                        result.unsupported_airports.append(
-                            from_entities[0]["text"].capitalize()
-                        )
+                        result.budget = None
                 from_entities = recognizer_result.entities.get("$instance", {}).get(
                     "str_date", []
                 )
@@ -99,11 +97,9 @@ class LuisHelper:
                     if recognizer_result.entities.get("str_date", [{"$instance": {}}])[0][
                         "$instance"
                     ]:
-                        result.origin = from_entities[0]["text"].capitalize()
+                        result.str_date = from_entities[0]["text"].capitalize()
                     else:
-                        result.unsupported_airports.append(
-                            from_entities[0]["text"].capitalize()
-                        )
+                        result.str_date = None
                 from_entities = recognizer_result.entities.get("$instance", {}).get(
                     "end_date", []
                 )
@@ -111,11 +107,9 @@ class LuisHelper:
                     if recognizer_result.entities.get("end_date", [{"$instance": {}}])[0][
                         "$instance"
                     ]:
-                        result.origin = from_entities[0]["text"].capitalize()
+                        result.end_date = from_entities[0]["text"].capitalize()
                     else:
-                        result.unsupported_airports.append(
-                            from_entities[0]["text"].capitalize()
-                        )
+                        result.end_date = None
 
         except Exception as exception:
             print(exception)
