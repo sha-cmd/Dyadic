@@ -10,7 +10,7 @@ class DefaultConfig:
     """Configuration for the bot."""
 
     PORT = 3978
-    APP_ID = "e27587f8-332e-4207-87eb-94ac5a02cbdb"
+    APP_ID = "8a173d35-e05f-45f7-a982-3da8307c7514"
     APP_PASSWORD = "b.e8Q~hoxcaSndsqxaTVOVc4y-M5YpeglFXbPa0X"
     LUIS_APP_ID = "c5a9c03c-654b-43cc-b113-f2a80a849554"
     LUIS_API_KEY = "708b8499902a49d6902bdfae011bca08"
