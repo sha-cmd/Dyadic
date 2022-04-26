@@ -10,12 +10,10 @@ class DefaultConfig:
     """Configuration for the bot."""
 
     PORT = 3978
-    APP_ID = os.environ.get("MicrosoftAppId", "")
-    APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
-    LUIS_APP_ID = os.environ.get("LuisAppId", "")
-    LUIS_API_KEY = os.environ.get("LuisAPIKey", "")
+    APP_ID = "e27587f8-332e-4207-87eb-94ac5a02cbdb"
+    APP_PASSWORD = "b.e8Q~hoxcaSndsqxaTVOVc4y-M5YpeglFXbPa0X"
+    LUIS_APP_ID = "c5a9c03c-654b-43cc-b113-f2a80a849554"
+    LUIS_API_KEY = "708b8499902a49d6902bdfae011bca08"
     # LUIS endpoint host name, ie "westus.api.cognitive.microsoft.com"
-    LUIS_API_HOST_NAME = os.environ.get("LuisAPIHostName", "")
-    APPINSIGHTS_INSTRUMENTATION_KEY = os.environ.get(
-        "AppInsightsInstrumentationKey", ""
-    )
+    LUIS_API_HOST_NAME = "sofistica.cognitiveservices.azure.com"
+    APPINSIGHTS_INSTRUMENTATION_KEY = "696fdbb2-d595-4695-8acb-70385c5be202"
