@@ -54,7 +54,7 @@ opencensus==0.8.0
 opencensus-context==0.1.2
 opencensus-ext-azure==1.1.3
 packaging==21.3
-pandas==1.4.2
+pandas==1.1.5
 pluggy==1.0.0
 portalocker==2.4.0
 poyo==0.5.0
