@@ -48,7 +48,7 @@ msrest==0.6.19
 msrestazure==0.6.4
 multidict==6.0.2
 multipledispatch==0.6.0
-numpy==1.22.3
+numpy==1.21.6
 oauthlib==3.2.0
 opencensus==0.8.0
 opencensus-context==0.1.2
