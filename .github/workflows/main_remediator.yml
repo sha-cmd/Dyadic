@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'remediator'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_28B807A28E4741FA8CA954160C47CD87 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D5D44AACC695425787D3C01EC7D242B5 }}
