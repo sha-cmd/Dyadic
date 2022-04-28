@@ -35,7 +35,7 @@ ADAPTER = BotFrameworkAdapter(SETTINGS)
 # LUIS adapter
 authoringKey = CONFIG.LUIS_KEY
 authoringEndpoint = CONFIG.LUIS_ENDPOINT
-app_id = CONFIG.LUIS_ID
+app_id = CONFIG.LUIS_APP_ID
 client = LUISAuthoringClient(authoringEndpoint, CognitiveServicesCredentials(authoringKey))
 versionId = "0.1"
 
