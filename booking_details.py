@@ -10,7 +10,7 @@ class BookingDetails:
         origin: str = None,
         str_date: str = None,
         end_date: str = None,
-        budget: str = None,
+        budget: str = None
     ):
         self.init_text = init_text
         self.destination = destination
