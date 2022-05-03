@@ -5,6 +5,7 @@ de noms dans les données d’entraînement."""
 
 import logging
 import pandas as pd
+import time
 
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
 from msrest.authentication import CognitiveServicesCredentials
@@ -33,14 +34,12 @@ SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 #print(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 ADAPTER = BotFrameworkAdapter(SETTINGS)
 # LUIS adapter
-authoringKey = CONFIG.LUIS_KEY
-authoringEndpoint = CONFIG.LUIS_ENDPOINT
+authoringKey = CONFIG.LUIS_AUTH_KEY
+authoringEndpoint = CONFIG.LUIS_AUTH_ENDPOINT
 app_id = CONFIG.LUIS_APP_ID
 client = LUISAuthoringClient(authoringEndpoint, CognitiveServicesCredentials(authoringKey))
 versionId = "0.1"
 
-# Define labeled example
-#client.model.add_intent(app_id, versionId, 'inform')
 data = pd.read_json('data/data_train.json', orient='records')
 enlst = []
 inlst = []
@@ -106,16 +105,27 @@ for entityName in enlst:
     try:
         modelId = client.model.add_entity(app_id, versionId, name=entityName)
     except Exception as e:
-        print(e)
         continue
 
 for it, sample in data.iterrows():
     try:
         labeledExampleUtteranceWithMLEntity = sample.to_dict()
-        client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, {"enableNestedChildren": True})
+        client.examples.add(app_id, versionId, labeledExampleUtteranceWithMLEntity, {"enableNestedChildren": "True"})
     except Exception as e:
         print('Add example  : ', e)
-        pass
+        print(sample)
+        print(it)
 
+# Entrainement
+async_training = client.train.train_version(app_id, versionId)
+is_trained = async_training.status == "UpToDate"
+trained_status = ["UpToDate", "Success"]
+while not is_trained:
+    time.sleep(0.25)
+    status = client.train.get_status(app_id, versionId)
+    is_trained = all(m.details.status in trained_status for m in status)
 
+# Publication
+publish_result = client.apps.publish(
+    app_id, versionId, is_staging=False, region='westeurope')
 
