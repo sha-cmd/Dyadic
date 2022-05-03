@@ -2,8 +2,6 @@
 # Licensed under the MIT License.
 """Flight booking dialog."""
 
-from datatypes_date_time.timex import Timex
-
 from botbuilder.dialogs import WaterfallDialog, WaterfallStepContext, DialogTurnResult
 from botbuilder.dialogs.prompts import ConfirmPrompt, TextPrompt, PromptOptions
 from botbuilder.core import MessageFactory, BotTelemetryClient, NullTelemetryClient
