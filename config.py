@@ -9,13 +9,13 @@ import os
 class DefaultConfig:
     """Configuration for the bot."""
 
-    PORT = 8000  # 3978
-    APP_ID = "e27587f8-332e-4207-87eb-94ac5a02cbdb"
-    APP_PASSWORD = "b.e8Q~hoxcaSndsqxaTVOVc4y-M5YpeglFXbPa0X"
-    LUIS_APP_ID = "c5a9c03c-654b-43cc-b113-f2a80a849554"
-    LUIS_API_KEY = "da69cdddb90f4046b807cf9b7a2e6eb2"
+    PORT = 8000
+    APP_ID = "cf9f2854-e02d-4158-9689-3cc7f023388c"
+    APP_PASSWORD = "tona@b1Utw3)[H-wRJ|uh1-CE"
+    LUIS_APP_ID = "f923d005-e9eb-498d-bce0-bfc459218bcc"
+    LUIS_API_KEY = "9745731b5960454cafc98e8707465823"
     # LUIS endpoint host name, ie "westus.api.cognitive.microsoft.com"
-    LUIS_API_HOST_NAME = "northeurope.api.cognitive.microsoft.com/"
-    LUIS_KEY = "708b8499902a49d6902bdfae011bca08"  # Authoring Key
-    LUIS_ENDPOINT = "https://sofistica.cognitiveservices.azure.com/"  # Authoring Endpoint
-    APPINSIGHTS_INSTRUMENTATION_KEY = "696fdbb2-d595-4695-8acb-70385c5be202"
+    LUIS_API_HOST_NAME = "westeurope.api.cognitive.microsoft.com"
+    LUIS_AUTH_KEY = "0e20947b94844978bbf151bf90243ff0"  # Authoring Key
+    LUIS_AUTH_ENDPOINT = "https://sidney.cognitiveservices.azure.com/"  # Authoring Endpoint
+    APPINSIGHTS_INSTRUMENTATION_KEY = "ec426a1e-af3f-4391-9d24-d3abdd7347d6"
