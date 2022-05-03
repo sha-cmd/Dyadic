@@ -75,12 +75,12 @@ class BookingDialog(CancelAndHelpDialog):
         return await step_context.next(booking_details.origin)
 
     async def budget_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
-        """Prompt for budget."""
+        """Prompt for flight budget."""
         booking_details = step_context.options
 
         # Capture the response to the previous step's prompt
         booking_details.destination = step_context.result
-        if booking_details.origin is None:
+        if booking_details.budget is None:
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
@@ -96,7 +96,7 @@ class BookingDialog(CancelAndHelpDialog):
 
         # Capture the response to the previous step's prompt
         booking_details.destination = step_context.result
-        if booking_details.origin is None:
+        if booking_details.str_date is None:
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
@@ -112,7 +112,7 @@ class BookingDialog(CancelAndHelpDialog):
 
         # Capture the response to the previous step's prompt
         booking_details.destination = step_context.result
-        if booking_details.origin is None:
+        if booking_details.end_date is None:
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
