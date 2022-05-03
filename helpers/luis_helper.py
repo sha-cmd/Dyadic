@@ -61,53 +61,36 @@ class LuisHelper:
                     "dst_city", []
                 )
                 if len(to_entities) > 0:
-                    if recognizer_result.entities.get("dst_city", [{"$instance": {}}])[0][
-                        "$instance"
-                    ]:
+                    if recognizer_result.entities.get("dst_city", [{"$instance": {}}])[0]:
                         result.destination = to_entities[0]["text"].capitalize()
-                    else:
-                        result.destination = None
 
                 from_entities = recognizer_result.entities.get("$instance", {}).get(
                     "or_city", []
                 )
                 if len(from_entities) > 0:
-                    if recognizer_result.entities.get("or_city", [{"$instance": {}}])[0][
-                        "$instance"
-                    ]:
+                    if recognizer_result.entities.get("or_city", [{"$instance": {}}])[0]:
                         result.origin = from_entities[0]["text"].capitalize()
-                    else:
-                        result.origin = None
+
                 from_entities = recognizer_result.entities.get("$instance", {}).get(
                     "budget", []
                 )
                 if len(from_entities) > 0:
-                    if recognizer_result.entities.get("budget", [{"$instance": {}}])[0][
-                        "$instance"
-                    ]:
+                    if recognizer_result.entities.get("budget", [{"$instance": {}}])[0]:
                         result.budget = from_entities[0]["text"].capitalize()
-                    else:
-                        result.budget = None
+
                 from_entities = recognizer_result.entities.get("$instance", {}).get(
                     "str_date", []
                 )
                 if len(from_entities) > 0:
-                    if recognizer_result.entities.get("str_date", [{"$instance": {}}])[0][
-                        "$instance"
-                    ]:
+                    if recognizer_result.entities.get("str_date", [{"$instance": {}}])[0]:
                         result.str_date = from_entities[0]["text"].capitalize()
-                    else:
-                        result.str_date = None
+
                 from_entities = recognizer_result.entities.get("$instance", {}).get(
                     "end_date", []
                 )
                 if len(from_entities) > 0:
-                    if recognizer_result.entities.get("end_date", [{"$instance": {}}])[0][
-                        "$instance"
-                    ]:
+                    if recognizer_result.entities.get("end_date", [{"$instance": {}}])[0]:
                         result.end_date = from_entities[0]["text"].capitalize()
-                    else:
-                        result.end_date = None
 
         except Exception as exception:
             print(exception)
