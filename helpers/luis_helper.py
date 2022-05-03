@@ -55,6 +55,8 @@ class LuisHelper:
                 result = BookingDetails()
 
                 # We need to get the result from the LUIS JSON which at every level returns an array.
+                result.init_text = recognizer_result.text
+
                 to_entities = recognizer_result.entities.get("$instance", {}).get(
                     "dst_city", []
                 )
