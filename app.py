@@ -95,7 +95,7 @@ def init_func(argv=None):
 def main():
     APP = init_func()
     try:
-        web.run_app(APP, host="localhost", port=CONFIG.PORT)
+        web.run_app(APP, host="0.0.0.0", port=CONFIG.PORT)
     except Exception as error:
         raise error
 
