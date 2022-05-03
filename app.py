@@ -55,7 +55,7 @@ ADAPTER = AdapterWithErrorHandler(SETTINGS, CONVERSATION_STATE)
 # less frequent updates.
 INSTRUMENTATION_KEY = CONFIG.APPINSIGHTS_INSTRUMENTATION_KEY
 TELEMETRY_CLIENT = ApplicationInsightsTelemetryClient(
-    INSTRUMENTATION_KEY, telemetry_processor=AiohttpTelemetryProcessor(), client_queue_size=10
+    INSTRUMENTATION_KEY, telemetry_processor=AiohttpTelemetryProcessor(), client_queue_size=1
 )
 
 # Code for enabling activity and personal information logging.
@@ -92,13 +92,10 @@ def init_func(argv=None):
     return APP
 
 
-def main():
+if __name__ == "__main__":
     APP = init_func()
     try:
         web.run_app(APP, host="0.0.0.0", port=CONFIG.PORT)
     except Exception as error:
         raise error
 
-
-if __name__ == "__main__":
-    main()
