@@ -17,8 +17,8 @@ from botbuilder.core import (
     ConversationState,
     MemoryStorage,
     UserState,
-    TelemetryLoggerMiddleware,
 )
+
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity
 from botbuilder.applicationinsights import ApplicationInsightsTelemetryClient
