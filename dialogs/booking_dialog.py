@@ -8,7 +8,6 @@ from botbuilder.dialogs import WaterfallDialog, WaterfallStepContext, DialogTurn
 from botbuilder.dialogs.prompts import ConfirmPrompt, TextPrompt, PromptOptions
 from botbuilder.core import MessageFactory, BotTelemetryClient, NullTelemetryClient
 from .cancel_and_help_dialog import CancelAndHelpDialog
-from .date_resolver_dialog import DateResolverDialog
 
 
 class BookingDialog(CancelAndHelpDialog):
@@ -40,10 +39,7 @@ class BookingDialog(CancelAndHelpDialog):
         waterfall_dialog.telemetry_client = telemetry_client
 
         self.add_dialog(text_prompt)
-        # self.add_dialog(ConfirmPrompt(ConfirmPrompt.__name__))
-        self.add_dialog(
-            DateResolverDialog(DateResolverDialog.__name__, self.telemetry_client)
-        )
+        self.add_dialog(ConfirmPrompt(ConfirmPrompt.__name__))
         self.add_dialog(waterfall_dialog)
 
         self.initial_dialog_id = WaterfallDialog.__name__
