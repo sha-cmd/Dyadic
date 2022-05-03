@@ -21,7 +21,7 @@
       "type": "TextBlock",
       "size": "default",
       "isSubtle": "true",
-      "text": "Le bot est correctement déployer.",
+      "text": "Le bot est correctement déployé.",
       "wrap": true,
       "maxLines": 0
     }
