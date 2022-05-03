@@ -126,6 +126,7 @@ while not is_trained:
     is_trained = all(m.details.status in trained_status for m in status)
 
 # Publication
-publish_result = client.apps.publish(
-    app_id, versionId, is_staging=False, region='westeurope')
+client.apps.update_settings(app_id, is_public=True)
+responseEndpointInfo = client.apps.publish(app_id, versionId, is_staging=False, region='westeurope')
+
 
