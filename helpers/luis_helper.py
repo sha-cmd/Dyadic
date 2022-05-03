@@ -57,40 +57,40 @@ class LuisHelper:
                 # We need to get the result from the LUIS JSON which at every level returns an array.
                 result.init_text = recognizer_result.text
 
-                to_entities = recognizer_result.entities.get("$instance", {}).get(
+                dst_city_entities = recognizer_result.entities.get("$instance", {}).get(
                     "dst_city", []
                 )
-                if len(to_entities) > 0:
+                if len(dst_city_entities) > 0:
                     if recognizer_result.entities.get("dst_city", [{"$instance": {}}])[0]:
-                        result.destination = to_entities[0]["text"].capitalize()
+                        result.destination = dst_city_entities[0]["text"].capitalize()
 
-                from_entities = recognizer_result.entities.get("$instance", {}).get(
+                or_city_entities = recognizer_result.entities.get("$instance", {}).get(
                     "or_city", []
                 )
-                if len(from_entities) > 0:
+                if len(or_city_entities) > 0:
                     if recognizer_result.entities.get("or_city", [{"$instance": {}}])[0]:
-                        result.origin = from_entities[0]["text"].capitalize()
+                        result.origin = or_city_entities[0]["text"].capitalize()
 
-                from_entities = recognizer_result.entities.get("$instance", {}).get(
+                budget_entities = recognizer_result.entities.get("$instance", {}).get(
                     "budget", []
                 )
-                if len(from_entities) > 0:
+                if len(budget_entities) > 0:
                     if recognizer_result.entities.get("budget", [{"$instance": {}}])[0]:
-                        result.budget = from_entities[0]["text"].capitalize()
+                        result.budget = budget_entities[0]["text"]
 
-                from_entities = recognizer_result.entities.get("$instance", {}).get(
+                str_date_entities = recognizer_result.entities.get("$instance", {}).get(
                     "str_date", []
                 )
-                if len(from_entities) > 0:
+                if len(str_date_entities) > 0:
                     if recognizer_result.entities.get("str_date", [{"$instance": {}}])[0]:
-                        result.str_date = from_entities[0]["text"].capitalize()
+                        result.str_date = str_date_entities[0]["text"]
 
-                from_entities = recognizer_result.entities.get("$instance", {}).get(
+                end_date_entities = recognizer_result.entities.get("$instance", {}).get(
                     "end_date", []
                 )
-                if len(from_entities) > 0:
+                if len(end_date_entities) > 0:
                     if recognizer_result.entities.get("end_date", [{"$instance": {}}])[0]:
-                        result.end_date = from_entities[0]["text"].capitalize()
+                        result.end_date = end_date_entities[0]["text"]
 
         except Exception as exception:
             print(exception)
