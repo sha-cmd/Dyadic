@@ -124,9 +124,3 @@ while not is_trained:
     time.sleep(0.25)
     status = client.train.get_status(app_id, versionId)
     is_trained = all(m.details.status in trained_status for m in status)
-
-# Publication
-client.apps.update_settings(app_id, is_public=True)
-responseEndpointInfo = client.apps.publish(app_id, versionId, is_staging=False, region='westeurope')
-
-
