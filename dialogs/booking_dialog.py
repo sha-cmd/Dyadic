@@ -15,7 +15,7 @@ CONFIG = DefaultConfig()
 logger = logging.getLogger(__name__)
 
 logger.addHandler(AzureLogHandler(
-    connection_string=CONFIG.APPINSIGHTS_INSTRUMENTATION_KEY)
+    connection_string='InstrumentationKey='+CONFIG.APPINSIGHTS_INSTRUMENTATION_KEY)
 )
 
 # Number of try
@@ -175,7 +175,6 @@ class BookingDialog(CancelAndHelpDialog):
             entities_dict['budget'] = booking_details.budget
             entities_dict['str_date'] = booking_details.str_date
             entities_dict['end_date'] = booking_details.end_date
-            print(entities_dict)
             self.telemetry_client.track_trace(name, properties=entities_dict, severity='DEBUG')
             return await step_context.end_dialog(booking_details)
         else:
