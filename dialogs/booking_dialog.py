@@ -15,7 +15,7 @@ CONFIG = DefaultConfig()
 logger = logging.getLogger(__name__)
 
 logger.addHandler(AzureLogHandler(
-    connection_string='InstrumentationKey='+CONFIG.APPINSIGHTS_INSTRUMENTATION_KEY)
+    connection_string='InstrumentationKey=' + CONFIG.APPINSIGHTS_INSTRUMENTATION_KEY)
 )
 
 # Number of try
