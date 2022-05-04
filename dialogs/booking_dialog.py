@@ -31,6 +31,7 @@ class BookingDialog(CancelAndHelpDialog):
                 self.budget_step,
                 self.str_date_step,
                 self.end_date_step,
+                self.confirm_step,
                 self.final_step,
             ],
         )
@@ -79,7 +80,7 @@ class BookingDialog(CancelAndHelpDialog):
         booking_details = step_context.options
 
         # Capture the response to the previous step's prompt
-        booking_details.destination = step_context.result
+        booking_details.origin = step_context.result
         if booking_details.budget is None:
             return await step_context.prompt(
                 TextPrompt.__name__,
@@ -95,7 +96,7 @@ class BookingDialog(CancelAndHelpDialog):
         booking_details = step_context.options
 
         # Capture the response to the previous step's prompt
-        booking_details.destination = step_context.result
+        booking_details.budget = step_context.result
         if booking_details.str_date is None:
             return await step_context.prompt(
                 TextPrompt.__name__,
@@ -111,7 +112,7 @@ class BookingDialog(CancelAndHelpDialog):
         booking_details = step_context.options
 
         # Capture the response to the previous step's prompt
-        booking_details.destination = step_context.result
+        booking_details.str_date = step_context.result
         if booking_details.end_date is None:
             return await step_context.prompt(
                 TextPrompt.__name__,
@@ -131,8 +132,9 @@ class BookingDialog(CancelAndHelpDialog):
         # Capture the results of the previous step
         booking_details.travel_date = step_context.result
         msg = (
-            f"Please confirm, I have you traveling to: { booking_details.destination }"
-            f" from: { booking_details.origin } on: { booking_details.travel_date}."
+            f"Please confirm, I have you traveling to: {booking_details.destination}"
+            f" from: {booking_details.origin} on: {booking_details.str_date}."
+            f" and {booking_details.end_date} for {booking_details.budget} dollars"
         )
 
         # Offer a YES/NO prompt.
@@ -142,10 +144,15 @@ class BookingDialog(CancelAndHelpDialog):
 
     async def final_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
         """Complete the interaction and end the dialog."""
+        entities_dict = {}
         if step_context.result:
             booking_details = step_context.options
-            booking_details.travel_date = step_context.result
-
+            entities_dict['destination'] = booking_details.destination
+            entities_dict['origin'] = booking_details.origin
+            entities_dict['budget'] = booking_details.budget
+            entities_dict['str_date'] = booking_details.str_date
+            entities_dict['end_date'] = booking_details.end_date
+            print(entities_dict)
             return await step_context.end_dialog(booking_details)
 
         return await step_context.end_dialog()
