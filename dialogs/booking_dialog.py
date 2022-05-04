@@ -1,16 +1,31 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 """Flight booking dialog."""
+import logging
 
 from botbuilder.dialogs import WaterfallDialog, WaterfallStepContext, DialogTurnResult
 from botbuilder.dialogs.prompts import ConfirmPrompt, TextPrompt, PromptOptions
 from botbuilder.core import MessageFactory, BotTelemetryClient, NullTelemetryClient
 from botbuilder.schema import InputHints
 from .cancel_and_help_dialog import CancelAndHelpDialog
+from config import DefaultConfig
+from opencensus.ext.azure.log_exporter import AzureLogHandler
+
+CONFIG = DefaultConfig()
+logger = logging.getLogger(__name__)
+
+logger.addHandler(AzureLogHandler(
+    connection_string=CONFIG.APPINSIGHTS_INSTRUMENTATION_KEY)
+)
 
 # Number of try
 global n
 n = 0
+global nb_of_errors  # Counter of errors
+nb_of_errors = 0
+global limit_of_errors  # Set the limit for errors
+limit_of_errors = 2
+
 
 class BookingDialog(CancelAndHelpDialog):
     """Flight booking implementation."""
@@ -149,6 +164,7 @@ class BookingDialog(CancelAndHelpDialog):
     async def final_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
         # Number of try
         global n
+        global nb_of_errors
         """Complete the interaction and end the dialog."""
         name = "Inquiry"
         entities_dict = {}
@@ -171,6 +187,9 @@ class BookingDialog(CancelAndHelpDialog):
                 await step_context.context.send_activity(message)
             else:
                 n = 0
+                nb_of_errors += 1
+                if not nb_of_errors < limit_of_errors:
+                    logger.warning('LUIS has exceeded authorized limit of errors.')  # AppInsights
                 miss_out_on = "I have noticed my lack of understanding, please come back after I’ll get upgraded?"
                 message = MessageFactory.text(miss_out_on, miss_out_on, InputHints.ignoring_input)
                 self.telemetry_client.track_trace(name, properties=entities_dict, severity='DEBUG')
