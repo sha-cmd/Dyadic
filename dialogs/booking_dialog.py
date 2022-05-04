@@ -5,8 +5,12 @@
 from botbuilder.dialogs import WaterfallDialog, WaterfallStepContext, DialogTurnResult
 from botbuilder.dialogs.prompts import ConfirmPrompt, TextPrompt, PromptOptions
 from botbuilder.core import MessageFactory, BotTelemetryClient, NullTelemetryClient
+from botbuilder.schema import InputHints
 from .cancel_and_help_dialog import CancelAndHelpDialog
 
+# Number of try
+global n
+n = 0
 
 class BookingDialog(CancelAndHelpDialog):
     """Flight booking implementation."""
@@ -143,7 +147,10 @@ class BookingDialog(CancelAndHelpDialog):
         )
 
     async def final_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
+        # Number of try
+        global n
         """Complete the interaction and end the dialog."""
+        name = "Inquiry"
         entities_dict = {}
         if step_context.result:
             booking_details = step_context.options
@@ -153,6 +160,19 @@ class BookingDialog(CancelAndHelpDialog):
             entities_dict['str_date'] = booking_details.str_date
             entities_dict['end_date'] = booking_details.end_date
             print(entities_dict)
+            self.telemetry_client.track_trace(name, properties=entities_dict, severity='DEBUG')
             return await step_context.end_dialog(booking_details)
-
+        else:
+            n += 1  # Check if the user have tried a custom number of time
+            custom_nb_time = 3
+            if n < custom_nb_time:
+                miss_out_on = f"I misunderstand your query, we can try {custom_nb_time - n} time more?"
+                message = MessageFactory.text(miss_out_on, miss_out_on, InputHints.ignoring_input)
+                await step_context.context.send_activity(message)
+            else:
+                n = 0
+                miss_out_on = "I have noticed my lack of understanding, please come back after I’ll get upgraded?"
+                message = MessageFactory.text(miss_out_on, miss_out_on, InputHints.ignoring_input)
+                self.telemetry_client.track_trace(name, properties=entities_dict, severity='DEBUG')
+                await step_context.context.send_activity(message)
         return await step_context.end_dialog()
