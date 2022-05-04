@@ -17,7 +17,7 @@ botbuilder-ai==4.14.1
 botbuilder-applicationinsights==4.14.1
 botbuilder-core==4.14.1
 botbuilder-dialogs==4.14.1
-botbuilder-integration-aiohttp==4.14.2
+botbuilder-integration-aiohttp==4.14.1
 botbuilder-integration-applicationinsights-aiohttp==4.14.1
 botbuilder-schema==4.14.1
 botframework-connector==4.14.1
@@ -99,5 +99,5 @@ typing-extensions==4.1.1
 urllib3==1.25.11
 Werkzeug==2.0.3
 whichcraft==0.6.1
-yarl==1.7.2
+yarl==1.4.2
 zipp==3.7.0
