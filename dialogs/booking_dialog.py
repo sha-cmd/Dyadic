@@ -149,7 +149,7 @@ class BookingDialog(CancelAndHelpDialog):
         booking_details = step_context.options
 
         # Capture the results of the previous step
-        booking_details.travel_date = step_context.result
+        booking_details.end_date = step_context.result
         msg = (
             f"Please confirm, I have you traveling to: {booking_details.destination}"
             f" from: {booking_details.origin} on: {booking_details.str_date}."
