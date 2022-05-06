@@ -21,11 +21,11 @@ jobs:
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./azuredeploy.json
         parameters: >
-          hostingPlanName: socketbot_App_service_plan
-          webSiteName: vendredi_13_mai_2022
-          skuName: F1
-          skuCapacity: 1
-          location: westeurope
+          hostingPlanName socketbot_App_service_plan
+          webSiteName vendredi_13_mai_2022
+          skuName F1
+          skuCapacity 1
+          location westeurope
 
       # output containerName variable from template
     - run: echo ${{ steps.deploy.outputs.containerName }}
