@@ -20,7 +20,7 @@ class LuisTest(AsyncTestCase):
         clientRuntime = LUISRuntimeClient(endpoint=predictionEndpoint, credentials=runtimeCredentials)
         predictionResponse = clientRuntime.prediction.resolve(app_id, query=predictionRequest)
         for x in range(len(predictionResponse.entities)):
-            entity = ent_dict[predictionResponse.entities[x].entity.replace(',', '').rstrip(' ')]
+            entity = ent_dict[predictionResponse.entities[x].entity.replace(',', '').rstrip(' ')]  # Luis capture "london ," as "london
             if not type(entity) == list:
                 assert predictionResponse.entities[x].type == entity
             elif type(entity) == list:
