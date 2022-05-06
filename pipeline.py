@@ -12,8 +12,7 @@ from msrest.authentication import CognitiveServicesCredentials
 
 from botbuilder.core import (
     BotFrameworkAdapterSettings,
-    TurnContext,
-    BotFrameworkAdapter,
+    BotFrameworkAdapter
 )
 
 from config import DefaultConfig
