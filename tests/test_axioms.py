@@ -1,9 +1,15 @@
+"""Fichier de tests utilisant une requête et une prédiction. La validation de cette prédiction est effectué
+par l’assertion d’une sortie vers un dictionnaire de valeurs pré-établi par l’évaluateur"""
+
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
 from aiounittest.case import AsyncTestCase
 
 
 class LuisTest(AsyncTestCase):
+    """Fonction utilisant le format de tests générable par la commande pytest tests/ à la racine du projet.
+    Le fichier pytest.ini permet de configurer notamment la gestion de la réponse asynchrone."""
+
     async def test_query_luis(self):
         app_id = "b60bdae3-2c61-4641-8e67-555460e637dc"
         predictionKey = "41d9afa00a284c538575ad4926339639"
