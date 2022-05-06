@@ -1,5 +1,7 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema#
 on: [push]
 name: Azure ARM
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -21,12 +23,19 @@ jobs:
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./azuredeploy.json
         parameters:
-          hostingPlanName: socketbot_App_service_plan
-          webSiteName: vendredi_13_mai_2022
-          skuName: F1
-          skuCapacity: 1
-          location: westeurope
-
-
-      # output containerName variable from template
+        - name: hostingPlanName
+          type: string
+          default: socketbot_App_service_plan
+        - name: webSiteName
+          type: string
+          default: vendredi_13_mai_2022
+        - name: skuName
+          type: string
+          default: F1
+        - name: skuCapacity
+          type: number
+          default: 1
+        - name: location
+          type: string
+          default: westeurope
     - run: echo ${{ steps.deploy.outputs.containerName }}
