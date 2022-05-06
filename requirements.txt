@@ -63,7 +63,6 @@ opencensus-ext-azure<=1.1.4
 outcome<=1.1.0
 packaging<=21.3
 pandas<=1.4.2
-pkg_resources<=0.0.0
 pluggy<=1.0.0
 portalocker<=2.4.0
 protobuf<=3.20.1
