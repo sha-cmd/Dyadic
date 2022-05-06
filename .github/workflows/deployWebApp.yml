@@ -20,7 +20,7 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./azuredeploy.json
-        parameters:
+        parameters: >
           hostingPlanName: socketbot_App_service_plan
           webSiteName: vendredi_13_mai_2022
           skuName: F1
