@@ -168,16 +168,16 @@ class BookingDialog(CancelAndHelpDialog):
         """Complete the interaction and end the dialog."""
         name = "Inquiry"
         entities_dict = {}
-        booking_details = step_context.options
-        entities_dict['destination'] = booking_details.destination
-        entities_dict['origin'] = booking_details.origin
-        entities_dict['budget'] = booking_details.budget
-        entities_dict['str_date'] = booking_details.str_date
-        entities_dict['end_date'] = booking_details.end_date
-
         if step_context.result:
+            booking_details = step_context.options
+            entities_dict['destination'] = booking_details.destination
+            entities_dict['origin'] = booking_details.origin
+            entities_dict['budget'] = booking_details.budget
+            entities_dict['str_date'] = booking_details.str_date
+            entities_dict['end_date'] = booking_details.end_date
             return await step_context.end_dialog(booking_details)
         else:
+
             n += 1  # Check if the user have tried a custom number of time
             custom_nb_time = 2
             if n < custom_nb_time:
@@ -189,6 +189,12 @@ class BookingDialog(CancelAndHelpDialog):
                 nb_of_errors += 1
                 if nb_of_errors == limit_of_errors:
                     logger.critical('LUIS has exceeded authorized limit of errors.')  # AppInsights
+                booking_details = step_context.options
+                entities_dict['destination'] = booking_details.destination
+                entities_dict['origin'] = booking_details.origin
+                entities_dict['budget'] = booking_details.budget
+                entities_dict['str_date'] = booking_details.str_date
+                entities_dict['end_date'] = booking_details.end_date
                 miss_out_on = "I have noticed my lack of understanding, please come back after I’ll get upgraded?"
                 message = MessageFactory.text(miss_out_on, miss_out_on, InputHints.ignoring_input)
                 name = "Bad Inquiry"
