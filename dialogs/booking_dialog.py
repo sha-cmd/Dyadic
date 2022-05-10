@@ -188,10 +188,10 @@ class BookingDialog(CancelAndHelpDialog):
                 n = 0
                 nb_of_errors += 1
                 if nb_of_errors == limit_of_errors:
-                    logger.warning('LUIS has exceeded authorized limit of errors.')  # AppInsights
+                    logger.critical('LUIS has exceeded authorized limit of errors.')  # AppInsights
                 miss_out_on = "I have noticed my lack of understanding, please come back after I’ll get upgraded?"
                 message = MessageFactory.text(miss_out_on, miss_out_on, InputHints.ignoring_input)
                 name = "Bad Inquiry"
-                self.telemetry_client.track_trace(name, properties=entities_dict, severity='DEBUG')
+                self.telemetry_client.track_trace(name, properties=entities_dict, severity='WARNING')
                 await step_context.context.send_activity(message)
         return await step_context.end_dialog()
