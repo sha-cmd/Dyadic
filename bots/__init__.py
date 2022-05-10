@@ -4,5 +4,6 @@
 
 from .dialog_bot import DialogBot
 from .dialog_and_welcome_bot import DialogAndWelcomeBot
+from .state_management_bot import StateManagementBot
 
-__all__ = ["DialogBot", "DialogAndWelcomeBot"]
+__all__ = ["DialogBot", "DialogAndWelcomeBot", "StateManagementBot"]
