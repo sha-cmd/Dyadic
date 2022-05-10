@@ -35,7 +35,7 @@ jobs:
         run: pytest --luisappid ${{ secrets.LUIS_APP_ID }} --luisapikey ${{ secrets.LUIS_API_KEY }} --luisapihostname ${{ secrets.LUIS_API_HOST_NAME }} tests/
 
       - name: Environment Variable
-        run:  APP_ID=${{ secrets.APP_ID }} &&\
+        run:  APP_ID="${{ secrets.APP_ID }}" &&\
                APP_PASSWORD="${{ secrets.APP_PASSWORD }}" &&\
                LUIS_APP_ID="${{ secrets.LUIS_APP_ID }}" &&\
                LUIS_API_KEY="${{ secrets.LUIS_API_KEY }}" &&\
