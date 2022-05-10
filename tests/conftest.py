@@ -3,7 +3,7 @@ from pytest import fixture
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--luisapiid",
+        "--luisappid",
         action="store"
     )
     parser.addoption(
@@ -16,8 +16,8 @@ def pytest_addoption(parser):
     )
 
 @fixture()
-def luisapiid(request):
-    return request.config.getoption("--luisapiid")
+def luisappid(request):
+    return request.config.getoption("--luisappid")
 
 @fixture()
 def luisapikey(request):
