@@ -8,8 +8,8 @@ from msrest.authentication import CognitiveServicesCredentials
 from aiounittest.case import AsyncTestCase
 
 
-async def query_luis_test(luisapiid, luisapikey, luisapihostname):
-    app_id = luisapiid
+async def query_luis_test(luisappid, luisapikey, luisapihostname):
+    app_id = luisappid
     predictionKey = luisapikey
     predictionEndpoint = "https://" + luisapihostname
     predictionRequest = {
