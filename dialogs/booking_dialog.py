@@ -168,14 +168,14 @@ class BookingDialog(CancelAndHelpDialog):
         """Complete the interaction and end the dialog."""
         name = "Inquiry"
         entities_dict = {}
+        booking_details = step_context.options
+        entities_dict['destination'] = booking_details.destination
+        entities_dict['origin'] = booking_details.origin
+        entities_dict['budget'] = booking_details.budget
+        entities_dict['str_date'] = booking_details.str_date
+        entities_dict['end_date'] = booking_details.end_date
+
         if step_context.result:
-            booking_details = step_context.options
-            entities_dict['destination'] = booking_details.destination
-            entities_dict['origin'] = booking_details.origin
-            entities_dict['budget'] = booking_details.budget
-            entities_dict['str_date'] = booking_details.str_date
-            entities_dict['end_date'] = booking_details.end_date
-            self.telemetry_client.track_trace(name, properties=entities_dict, severity='DEBUG')
             return await step_context.end_dialog(booking_details)
         else:
             n += 1  # Check if the user have tried a custom number of time
