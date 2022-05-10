@@ -33,15 +33,6 @@ jobs:
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Make Unit Test
         run: pytest --luisappid ${{ secrets.LUIS_APP_ID }} --luisapikey ${{ secrets.LUIS_API_KEY }} --luisapihostname ${{ secrets.LUIS_API_HOST_NAME }} tests/
-      - name: Environment variables
-        run: export APP_ID="${{ secrets.APP_ID }}" &&\
-              export APP_PASSWORD="${{ secrets.APP_PASSWORD }}" &&\
-              export LUIS_APP_ID="${{ secrets.LUIS_APP_ID }}" &&\
-              export LUIS_API_KEY="${{ secrets.LUIS_API_KEY }}" &&\
-              export LUIS_API_HOST_NAME="${{ secrets.LUIS_API_HOST_NAME }}" &&\
-              export LUIS_AUTH_KEY="${{ secrets.LUIS_AUTH_KEY }}" &&\ 
-              export LUIS_AUTH_ENDPOINT="${{ secrets.LUIS_AUTH_ENDPOINT }}" &&\
-              export APPINSIGHTS_INSTRUMENTATION_KEY="${{ secrets.APPINSIGHTS_INSTRUMENTATION_KEY }}"
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
