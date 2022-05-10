@@ -1,6 +1,6 @@
 from botbuilder.core import ActivityHandler
-from conversation_data import ConversationState
-from user_profile import UserState
+from botbuilder.core import ConversationState
+from botbuilder.core import UserState
 
 
 class StateManagementBot(ActivityHandler):
