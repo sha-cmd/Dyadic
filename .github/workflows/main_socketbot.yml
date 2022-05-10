@@ -34,6 +34,16 @@ jobs:
       - name: Make Unit Test
         run: pytest --luisappid ${{ secrets.LUIS_APP_ID }} --luisapikey ${{ secrets.LUIS_API_KEY }} --luisapihostname ${{ secrets.LUIS_API_HOST_NAME }} tests/
 
+      - name: Environment Variable
+        run:  APP_ID=${{ secrets.APP_ID }} &&\
+               APP_PASSWORD="${{ secrets.APP_PASSWORD }}" &&\
+               LUIS_APP_ID="${{ secrets.LUIS_APP_ID }}" &&\
+               LUIS_API_KEY="${{ secrets.LUIS_API_KEY }}" &&\
+               LUIS_API_HOST_NAME="${{ secrets.LUIS_API_HOST_NAME }}" &&\
+               LUIS_AUTH_KEY="${{ secrets.LUIS_AUTH_KEY }}" &&\
+               LUIS_AUTH_ENDPOINT="${{ secrets.LUIS_AUTH_ENDPOINT }}" &&\
+               APPINSIGHTS_INSTRUMENTATION_KEY="${{ secrets.APPINSIGHTS_INSTRUMENTATION_KEY }}"
+
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
