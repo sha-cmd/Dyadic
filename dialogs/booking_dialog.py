@@ -179,7 +179,7 @@ class BookingDialog(CancelAndHelpDialog):
             return await step_context.end_dialog(booking_details)
         else:
             n += 1  # Check if the user have tried a custom number of time
-            custom_nb_time = 3
+            custom_nb_time = 2
             if n < custom_nb_time:
                 miss_out_on = f"I misunderstand your query, we can try {custom_nb_time - n} time more?"
                 message = MessageFactory.text(miss_out_on, miss_out_on, InputHints.ignoring_input)
