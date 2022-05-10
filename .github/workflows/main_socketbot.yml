@@ -34,7 +34,7 @@ jobs:
       - name: Make Unit Test
         run: pytest --luisappid ${{ secrets.LUIS_APP_ID }} --luisapikey ${{ secrets.LUIS_API_KEY }} --luisapihostname ${{ secrets.LUIS_API_HOST_NAME }} tests/
 
-      - name: Environment Variable
+      - name: Environment Variables
         run:  python env_var.py ${{ secrets.APP_ID }} \
                "${{ secrets.APP_PASSWORD }}" \
                "${{ secrets.LUIS_APP_ID }}" \
