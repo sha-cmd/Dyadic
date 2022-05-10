@@ -41,7 +41,7 @@ jobs:
               export LUIS_API_HOST_NAME=${{ secrets.LUIS_API_HOST_NAME }} &&\
               export LUIS_AUTH_KEY=${{ secrets.LUIS_AUTH_KEY }} &&\ 
               export LUIS_AUTH_ENDPOINT=${{ secrets.LUIS_AUTH_ENDPOINT }} &&\
-              export APPINSIGHTS_INSTRUMENTATION_KEY=${{ secrets.APPINSIGHTS_INSTRUMENTATION }}
+              export APPINSIGHTS_INSTRUMENTATION_KEY=${{ secrets.APPINSIGHTS_INSTRUMENTATION_KEY }}
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
