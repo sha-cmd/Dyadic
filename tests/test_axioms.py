@@ -5,7 +5,6 @@ import os
 
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
-from aiounittest.case import AsyncTestCase
 
 
 async def query_luis_test(luisappid, luisapikey, luisapihostname):
