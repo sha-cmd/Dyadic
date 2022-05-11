@@ -14,7 +14,6 @@ from botbuilder.core import (
     NullTelemetryClient,
 )
 from botbuilder.schema import InputHints
-
 from booking_details import BookingDetails
 from flight_booking_recognizer import FlightBookingRecognizer
 from helpers.luis_helper import LuisHelper, Intent
@@ -106,12 +105,6 @@ class MainDialog(ComponentDialog):
         # the Result here will be null.
         if step_context.result is not None:
             result = step_context.result
-
-            # Now we have all the booking details call the booking service.
-
-            # If the call to the booking service was successful tell the user.
-            # time_property = Timex(result.travel_date)
-            # travel_date_msg = time_property.to_natural_language(datetime.now())
             msg_txt = (f"I have you booked to {result.destination} from {result.origin} on {result.str_date} "
                        f"to {result.end_date}, for {result.budget} dollars at maximum")
             message = MessageFactory.text(msg_txt, msg_txt, InputHints.ignoring_input)
