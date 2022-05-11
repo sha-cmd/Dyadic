@@ -101,7 +101,7 @@ class MainDialog(ComponentDialog):
     async def final_step(self, step_context: WaterfallStepContext) -> DialogTurnResult:
         # If the child dialog ("BookingDialog") was cancelled or the user failed to confirm,
         # the Result here will be null.
-        if step_context.result is not None:
+        if not isinstance(step_context.result, type(None)):
             result = step_context.result
             msg_txt = (f"I have you booked to {result.destination} from {result.origin} on {result.str_date} "
                        f"to {result.end_date}, for {result.budget} dollars at maximum")

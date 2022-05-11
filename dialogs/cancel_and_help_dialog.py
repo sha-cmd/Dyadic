@@ -26,14 +26,14 @@ class CancelAndHelpDialog(ComponentDialog):
         self, inner_dc: DialogContext, options: object
     ) -> DialogTurnResult:
         result = await self.interrupt(inner_dc)
-        if result is not None:
+        if not isinstance(result, type(None)):
             return result
 
         return await super(CancelAndHelpDialog, self).on_begin_dialog(inner_dc, options)
 
     async def on_continue_dialog(self, inner_dc: DialogContext) -> DialogTurnResult:
         result = await self.interrupt(inner_dc)
-        if result is not None:
+        if not isinstance(result, type(None)):
             return result
 
         return await super(CancelAndHelpDialog, self).on_continue_dialog(inner_dc)

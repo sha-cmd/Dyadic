@@ -16,19 +16,19 @@ class DialogBot(ActivityHandler):
     """Main activity handler for the bot."""
 
     def __init__(
-        self,
-        conversation_state: ConversationState,
-        user_state: UserState,
-        dialog: Dialog,
-        telemetry_client: BotTelemetryClient,
+            self,
+            conversation_state: ConversationState,
+            user_state: UserState,
+            dialog: Dialog,
+            telemetry_client: BotTelemetryClient,
     ):
-        if conversation_state is None:
+        if isinstance(conversation_state, type(None)):
             raise Exception(
                 "[DialogBot]: Missing parameter. conversation_state is required"
             )
-        if user_state is None:
+        if isinstance(user_state, type(None)):
             raise Exception("[DialogBot]: Missing parameter. user_state is required")
-        if dialog is None:
+        if isinstance(dialog, type(None)):
             raise Exception("[DialogBot]: Missing parameter. dialog is required")
 
         self.conversation_state = conversation_state
@@ -60,7 +60,7 @@ class DialogBot(ActivityHandler):
         """
         Sets the telemetry client for logging events.
         """
-        if value is None:
+        if isinstance(value, type(None)):
             self._telemetry_client = NullTelemetryClient()
         else:
             self._telemetry_client = value

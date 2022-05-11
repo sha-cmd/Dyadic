@@ -43,7 +43,7 @@ class FlightBookingRecognizer(Recognizer):
     @property
     def is_configured(self) -> bool:
         # Returns true if luis is configured in the config.py and initialized.
-        return self._recognizer is not None
+        return not isinstance(self._recognizer, type(None))
 
     async def recognize(self, turn_context: TurnContext) -> RecognizerResult:
         return await self._recognizer.recognize(turn_context)

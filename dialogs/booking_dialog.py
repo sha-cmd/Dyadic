@@ -67,7 +67,7 @@ class BookingDialog(CancelAndHelpDialog):
         """Prompt for destination."""
         booking_details = step_context.options
 
-        if booking_details.destination is None:
+        if isinstance(booking_details.destination, type(None)):
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
@@ -83,7 +83,7 @@ class BookingDialog(CancelAndHelpDialog):
 
         # Capture the response to the previous step's prompt
         booking_details.destination = step_context.result
-        if booking_details.origin is None:
+        if isinstance(booking_details.origin, type(None)):
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
@@ -99,7 +99,7 @@ class BookingDialog(CancelAndHelpDialog):
 
         # Capture the response to the previous step's prompt
         booking_details.origin = step_context.result
-        if booking_details.budget is None:
+        if isinstance(booking_details.budget, type(None)):
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
@@ -115,7 +115,7 @@ class BookingDialog(CancelAndHelpDialog):
 
         # Capture the response to the previous step's prompt
         booking_details.budget = step_context.result
-        if booking_details.str_date is None:
+        if isinstance(booking_details.str_date, type(None)):
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
@@ -131,7 +131,7 @@ class BookingDialog(CancelAndHelpDialog):
 
         # Capture the response to the previous step's prompt
         booking_details.str_date = step_context.result
-        if booking_details.end_date is None:
+        if isinstance(booking_details.end_date, type(None)):
             return await step_context.prompt(
                 TextPrompt.__name__,
                 PromptOptions(
