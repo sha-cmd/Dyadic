@@ -15,13 +15,16 @@ def pytest_addoption(parser):
         action="store"
     )
 
+
 @fixture()
 def luisappid(request):
     return request.config.getoption("--luisappid")
 
+
 @fixture()
 def luisapikey(request):
     return request.config.getoption("--luisapikey")
+
 
 @fixture()
 def luisapihostname(request):
