@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """Ce fichier permet de communiquer directement à l’instance LUIS sur Az, les données via son API REST.
 La gestion des entités et des intentions est automatisable à 95%. Les features des entités doivent-être portées à
 connaissance de LUIS dans le code de ce fichier, via l’API REST et n’est pas résilient en cas de changement, ou d’ajout,

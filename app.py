@@ -1,5 +1,4 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
+#!/usr/bin/env python
 
 """
 This sample shows how to create a bot that demonstrates the following:
@@ -95,7 +94,7 @@ def init_func(argv=None):
 if __name__ == "__main__":
     APP = init_func()
     try:
-        web.run_app(APP, host="0.0.0.0", port=CONFIG.PORT)
+        web.run_app(APP, host="localhost", port=CONFIG.PORT)
     except Exception as error:
         raise error
 

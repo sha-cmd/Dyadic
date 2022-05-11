@@ -1,7 +1,4 @@
-import logging
-import pandas as pd
-import time
-
+#!/usr/bin/env python
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
 from msrest.authentication import CognitiveServicesCredentials
 

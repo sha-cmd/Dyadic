@@ -1,5 +1,4 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
+#!/usr/bin/env python
 """Handle cancel and help intents."""
 
 from botbuilder.core import BotTelemetryClient, NullTelemetryClient

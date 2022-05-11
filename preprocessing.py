@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """Ce fichier nous permet de créer deux jeux de données pour LUIS. La particularité de ce travail reste que LUIS
 demande des clés de dictionnaire différentes pour chaque jeu. Ainsi, nous traiterons deux jeux de données dans
 une boucle unique. L’écriture est un peu déconcertante, mais cela permet d’avoir les bonnes clés pour LUIS et

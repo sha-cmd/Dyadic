@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """Fichier de tests utilisant une requête et une prédiction. La validation de cette prédiction est effectué
 par l’assertion d’une sortie vers un dictionnaire de valeurs pré-établies par l’évaluateur"""
 

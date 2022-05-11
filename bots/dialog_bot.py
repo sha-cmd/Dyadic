@@ -1,5 +1,4 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
+#!/usr/bin/env python
 """Implements bot Activity handler."""
 
 from botbuilder.core import (

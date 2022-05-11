@@ -1,6 +1,4 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
-
+#!/usr/bin/env python
 from botbuilder.dialogs import (
     ComponentDialog,
     WaterfallDialog,
