@@ -170,11 +170,6 @@ class BookingDialog(CancelAndHelpDialog):
         entities_dict = {}
         if step_context.result:
             booking_details = step_context.options
-            entities_dict['destination'] = booking_details.destination
-            entities_dict['origin'] = booking_details.origin
-            entities_dict['budget'] = booking_details.budget
-            entities_dict['str_date'] = booking_details.str_date
-            entities_dict['end_date'] = booking_details.end_date
             return await step_context.end_dialog(booking_details)
         else:
             n += 1  # Check if the user have tried a custom number of time
