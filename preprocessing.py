@@ -6,6 +6,8 @@ d’optimiser le code pour qu’il soit rapide"""
 import pandas as pd
 import re
 
+global size
+size = 1000  # Nombre total d’intention book (train + test)
 
 def add_entityLabels(some_train_dict, some_test_dict, a_dict):
     composition = a_dict['labels']['acts']
@@ -56,6 +58,7 @@ def to_dict(a_dict):
 
 
 def main():
+    global size
     df = pd.read_json('data/frames.json')
     # LUIS nécessite un format de dictionnaire pour l’entraînement différent de celui pour le test.
     # Ainsi nous avons, dans une même boucle traité de jeux de données, dont le tirage aléatoire donne
@@ -72,8 +75,8 @@ def main():
                 
     # Format de fichier JSON conforme pour entraîner LUIS, la graine permet la reproductibilité
     data = pd.DataFrame(data_lst)  # jeu d’entraînement
-    df_book = data.loc[data['intentName'] == 'book'].sample(1000, random_state=42)
-    df_none = data.loc[data['intentName'] == 'None'].sample(100, random_state=42)
+    df_book = data.loc[data['intentName'] == 'book'].sample(size, random_state=42)
+    df_none = data.loc[data['intentName'] == 'None'].sample(int(size/10), random_state=42)
     book_nb = len(df_book)
     none_nb = len(df_none)
     df_train = pd.concat([df_book[:int(book_nb*0.75)], df_none[:int(none_nb*0.75)]])
@@ -81,8 +84,8 @@ def main():
 
     # Format de fichier JSON conforme pour tester LUIS, la graine permet la reproductibilité
     data = pd.DataFrame(data_test_lst)  # jeu de test (avec d’autres clés)
-    df_book = data.loc[data['intent'] == 'book'].sample(1000, random_state=42)
-    df_none = data.loc[data['intent'] == 'None'].sample(100, random_state=42)
+    df_book = data.loc[data['intent'] == 'book'].sample(size, random_state=42)
+    df_none = data.loc[data['intent'] == 'None'].sample(int(size/10), random_state=42)
     book_nb = len(df_book)
     none_nb = len(df_none)
     df_test = pd.concat([df_book[int(book_nb * 0.75):], df_none[int(none_nb * 0.75):]])
