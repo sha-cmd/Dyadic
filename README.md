@@ -19,6 +19,8 @@ Le script en Python, [Pipeline](https://github.com/sha-cmd/Dyadic/blob/main/pipe
 
 Le script en Python, [Publish](https://github.com/sha-cmd/Dyadic/blob/main/publish_luis.py), permet de publier le point d’accès à l’API Rest de l’IA LUIS.
 
+![chatbot interface](img/chatbot.png)
+
 ## Adaptation du [modèle](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/21.corebot-app-insights) à la prise de réservation de billet d’avion
 
 Le fichier au format JSON, [Welcome Card](https://github.com/sha-cmd/Dyadic/blob/main/bots/resources/welcomeCard.json), permet de personnaliser l’accueil du client par le bot.
