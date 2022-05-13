@@ -15,7 +15,7 @@ Le script en Python, [Pipeline](https://github.com/sha-cmd/Dyadic/blob/main/pipe
 
 ![Diagramme de séquence du script pipeline](img/pipeline.png)
 
-### Publish
+### Publishing
 
 Le script en Python, [Publish](https://github.com/sha-cmd/Dyadic/blob/main/publish_luis.py), permet de publier le point d’accès à l’API Rest de l’IA LUIS.
 
