@@ -19,7 +19,18 @@ from botbuilder.core import (
 from config import DefaultConfig
 
 
-def main():
+global client
+global app_id
+global versionId
+
+
+
+
+
+def personalize_luis():
+    global client
+    global app_id
+    global versionId
     ################################################################
     logger = logging.getLogger(__name__)
     #logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=<your_key>'))
@@ -60,12 +71,16 @@ def main():
         client.model.add_prebuilt(app_id, versionId, prebuilt_extractor_names=["number"])
     except:
         pass
+
+
     # Add intents
     for intentName in inlst:
         try:
             client.model.add_intent(app_id, versionId, intentName)
         except:
             continue
+
+
     # Add entity with features
     entityWithFeatures =  {'or_city': 'geographyV2',
      'dst_city': 'geographyV2',
@@ -118,6 +133,11 @@ def main():
             print(sample)
             print(it)
 
+
+def train():
+    global client
+    global app_id
+    global versionId
     # Entrainement
     async_training = client.train.train_version(app_id, versionId)
     is_trained = async_training.status == "UpToDate"
@@ -126,6 +146,12 @@ def main():
         time.sleep(0.25)
         status = client.train.get_status(app_id, versionId)
         is_trained = all(m.details.status in trained_status for m in status)
+
+
+def main():
+    personalize_luis()
+    train()
+
 
 if __name__ == "__main__":
     main()
