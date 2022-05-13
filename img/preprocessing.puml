@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Runtime -> RawData: Iteration\non even\n"turns"\nindexes
+RawData -> CleanData: Structuration for LUIS Training
+CleanData -> TrainData: Sampling 75%\nwith\nfixed seed
+RawData -> CleanData: Structuration for LUIS Testing
+CleanData -> TestData: Sampling 25%\nwith\nsame seed\nfor reproducibility
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Client -> Bot: Authentication Request
+Client <- Bot: Authentication Response
+Client -> LUIS: Authentication Request
+Client <- LUIS: Authentication Response
+
+Client -> LUIS: Add Intents, Entities, Features
+Client -> LUIS: Add Examples
+Client -> LUIS: Train
+@enduml
