@@ -38,3 +38,14 @@ Le script en Python, [Application](https://github.com/sha-cmd/Dyadic/blob/main/a
 Le script en Python, [Config](https://github.com/sha-cmd/Dyadic/blob/main/config.py), est une interface entre les variables d’environnement et le processus de notre Chatbot. Le code comprend en plus des clés pour LUIS Authoring, car le [pipeline](https://github.com/sha-cmd/Dyadic/blob/main/pipeline.py) le requiert, pour transférer les données d’entraînement, entre autre chose.
 
 Le script en Python, [Booking Details](https://github.com/sha-cmd/Dyadic/blob/main/booking_details.py) est une classe pour instancier un objet canonique pour nos réservations, ce second reçoit les entités par LUIS, ou au cours du dialogue en cascade (.cf "WaterFall Dialog") dans le script en Python [Booking Dialog](https://github.com/sha-cmd/Dyadic/blob/main/dialogs/booking_dialog.py).
+
+## Maintenance et Amélioration
+
+Le fichier au format notebook Jupyter, [KPI](https://github.com/sha-cmd/Dyadic/blob/main/notebooks/KPI.ipynb), nous permet de mesurer les KPI pour chaque entité de nos réservations, toutefois, pour limiter les coûts de prédiction, l’interface LUIS peut aussi être mise à contribution. 
+
+![Interface de test Luis](img/luistests.png)
+
+Les erreurs remontant dans l’interface d’App Insights Azure donnent lieu à une alerte mail, permettant d’agir à temps, sur l’entraînement de LUIS, en corrigeant les labels de ces phrases ayant posé un problème de compréhension à l’IA d’Azure, LUIS. 
+
+Ainsi l’amélioration est en continu, avec une performance accrue à chaque itération.
+
