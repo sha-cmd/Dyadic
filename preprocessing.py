@@ -57,7 +57,7 @@ def to_dict(a_dict):
     return some_train_dict, some_test_dict
 
 
-def main():
+def sampling():
     global size
     df = pd.read_json('data/frames.json')
     # LUIS nécessite un format de dictionnaire pour l’entraînement différent de celui pour le test.
@@ -90,7 +90,11 @@ def main():
     none_nb = len(df_none)
     df_test = pd.concat([df_book[int(book_nb * 0.75):], df_none[int(none_nb * 0.75):]])
     pd.DataFrame(df_test).to_json('data/data_test.json', orient='records')
-    
+
+
+def main():
+    sampling()
+
     
 if __name__ == "__main__":
     main()
