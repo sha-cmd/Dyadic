@@ -1,5 +1,5 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
+#!/usr/bin/python
+
 """Helper to create reply object."""
 
 from datetime import datetime

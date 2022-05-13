@@ -1,5 +1,5 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
+#!/usr/bin/python
+
 """Helpers module."""
 
 from . import activity_helper, luis_helper, dialog_helper

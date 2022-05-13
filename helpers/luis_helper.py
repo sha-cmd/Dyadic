@@ -1,5 +1,5 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
+#!/usr/bin/python
+
 from enum import Enum
 from typing import Dict
 from botbuilder.ai.luis import LuisRecognizer
