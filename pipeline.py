@@ -16,7 +16,7 @@ from botbuilder.core import (
     BotFrameworkAdapter
 )
 
-from config import DefaultConfig
+from .config import DefaultConfig
 
 
 global client
