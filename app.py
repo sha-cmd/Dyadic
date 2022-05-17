@@ -36,7 +36,6 @@ from flight_booking_recognizer import FlightBookingRecognizer
 CONFIG = DefaultConfig()
 
 # Create adapter.
-# See https://aka.ms/about-bot-adapter to learn more about how bots work.
 SETTINGS = BotFrameworkAdapterSettings(CONFIG.APP_ID, CONFIG.APP_PASSWORD)
 
 # Create MemoryStorage, UserState and ConversationState
@@ -45,7 +44,6 @@ USER_STATE = UserState(MEMORY)
 CONVERSATION_STATE = ConversationState(MEMORY)
 
 # Create adapter.
-# See https://aka.ms/about-bot-adapter to learn more about how bots work.
 ADAPTER = AdapterWithErrorHandler(SETTINGS, CONVERSATION_STATE)
 
 # Create telemetry client.
@@ -56,10 +54,6 @@ INSTRUMENTATION_KEY = CONFIG.APPINSIGHTS_INSTRUMENTATION_KEY
 TELEMETRY_CLIENT = ApplicationInsightsTelemetryClient(
     INSTRUMENTATION_KEY, telemetry_processor=AiohttpTelemetryProcessor(), client_queue_size=1
 )
-
-# Code for enabling activity and personal information logging.
-# TELEMETRY_LOGGER_MIDDLEWARE = TelemetryLoggerMiddleware(telemetry_client=TELEMETRY_CLIENT, log_personal_information=True)
-# ADAPTER.use(TELEMETRY_LOGGER_MIDDLEWARE)
 
 # Create dialogs and Bot
 RECOGNIZER = FlightBookingRecognizer(CONFIG)
