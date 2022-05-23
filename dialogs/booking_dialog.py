@@ -167,10 +167,10 @@ class BookingDialog(CancelAndHelpDialog):
         """Complete the interaction and end the dialog."""
         name = "Inquiry"
         entities_dict = {}
-        if step_context.result:
+        if step_context.result == True:
             booking_details = step_context.options
             return await step_context.end_dialog(booking_details)
-        else:
+        elif step_context.result == False:
             n += 1  # Check if the user have tried a custom number of time
             custom_nb_time = 2
             if n < custom_nb_time:
