@@ -193,4 +193,4 @@ class BookingDialog(CancelAndHelpDialog):
                 name = "Bad Inquiry"
                 self.telemetry_client.track_trace(name, properties=entities_dict, severity='WARNING')
                 await step_context.context.send_activity(message)
-        return await step_context.end_dialog()
+            return await step_context.end_dialog()
